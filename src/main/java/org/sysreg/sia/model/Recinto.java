@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Recinto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	// @Id Evitamos así que se inerte la parcela de nuevo
+	// @Id Evitamos asi que se inerte la parcela de nuevo
 	@ManyToOne
 	@JoinColumns({
 			@JoinColumn(name = "MUNICIPIO_ID", referencedColumnName = "MUNICIPIO_ID"),
