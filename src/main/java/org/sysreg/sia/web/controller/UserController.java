@@ -6,11 +6,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.sysreg.sia.model.Campo;
 import org.sysreg.sia.model.Comarca;
+import org.sysreg.sia.model.Coordenadas;
 import org.sysreg.sia.model.Municipio;
 import org.sysreg.sia.model.Parcela;
-import org.sysreg.sia.model.ParcelaId;
 import org.sysreg.sia.model.Provincia;
-import org.sysreg.sia.model.User;
+import org.sysreg.sia.model.Recinto;
 import org.sysreg.sia.model.Uso;
 import org.sysreg.sia.model.Usuario;
 import org.sysreg.sia.model.dao.CampoDao;
@@ -18,6 +18,7 @@ import org.sysreg.sia.model.dao.ComarcaDao;
 import org.sysreg.sia.model.dao.MunicipioDao;
 import org.sysreg.sia.model.dao.ParcelaDao;
 import org.sysreg.sia.model.dao.ProvinciaDao;
+import org.sysreg.sia.model.dao.RecintoDao;
 import org.sysreg.sia.model.dao.UserDao;
 import org.sysreg.sia.model.dao.UsoDao;
 import org.sysreg.sia.model.dao.UsuarioDao;
@@ -48,6 +49,9 @@ public class UserController {
 
 	@Autowired
 	private CampoDao campoDao;
+
+	@Autowired
+	private RecintoDao recintoDao;
 
 	@RequestMapping("/users.html")
 	public String users(ModelMap models) {
@@ -83,23 +87,30 @@ public class UserController {
 		parc.setParcela(1);
 		parc.setSuperficie(2F);
 		parc.setCampo(camp);
+		parc.setCoordenadas(new Coordenadas(123D, 456D, "DATUM", 30));
 
-		// Uso uso = new Uso();
-		// uso.setDescripcion("Uso de prueba");
-		// usoDao.persist(uso);
-		// User u = new User();
-		// u.setEnabled(true);
-		// u.setPassword("sdfas");
-		// u.setUsername("asdf");
-		// userDao.persist(u);
+		Uso uso = new Uso();
+		uso.setDescripcion("Uso de prueba");
+
+		Recinto rec = new Recinto();
+		rec.setParcela(parc);
+		rec.setRecinto(10);
+		rec.setSuperficie(1.1F);
+		rec.setCoefRegadio(2F);
+		rec.setCoordenadas(new Coordenadas(123D, 456D, "DATUM", 30));
+		rec.setUso(uso);
 
 		provinciaDao.persist(p);
 		comarcaDao.persist(c);
 		municipioDao.persist(m);
+		usoDao.persist(uso);
 		usuarioDao.persist(u);
 		campoDao.persist(camp);
 		System.out.println("Campo Insertado, paso a parcelas");
 		parcelaDao.persist(parc);
+		System.out.println("Parcela Insertada, paso a recintos");
+
+		recintoDao.persist(rec);
 		models.put("users", userDao.getAllUsers());
 		return "users";
 	}

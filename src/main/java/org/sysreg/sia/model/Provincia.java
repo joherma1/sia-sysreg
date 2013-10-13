@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,18 +13,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PROVINCIAS")
 public class Provincia implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int codigo;
 
 	@Column
 	private String nombre;
-
 	@OneToMany(mappedBy = "provincia")
 	private Set<Comarca> comarcas = new HashSet<Comarca>();
-
-	// private Set<Usuario> usuarios = new HashSet<Usuario>();
-	// private Set<Parcela> parcelas;
 
 	public int getCodigo() {
 		return codigo;
@@ -50,20 +46,4 @@ public class Provincia implements Serializable {
 	public void setComarcas(Set<Comarca> comarcas) {
 		this.comarcas = comarcas;
 	}
-
-	// public Set<Parcela> getParcelas() {
-	// return parcelas;
-	// }
-	//
-	// public void setParcelas(Set<Parcela> parcelas) {
-	// this.parcelas = parcelas;
-	// }
-	//
-	// public Set<Usuario> getUsuarios() {
-	// return usuarios;
-	// }
-	//
-	// public void setUsuarios(Set<Usuario> usuarios) {
-	// this.usuarios = usuarios;
-	// }
 }

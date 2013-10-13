@@ -3,7 +3,6 @@ package org.sysreg.sia.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MUNICIPIOS")
 public class Municipio implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int codigo;
@@ -78,7 +78,8 @@ public class Municipio implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Municipio [codigo=" + codigo + ", nombre=" + nombre + ", comarca=" + comarca.getNombre()
-				+ ", provincia=" + getProvincia().getNombre() + "]";
+		return "Municipio [codigo=" + codigo + ", nombre=" + nombre
+				+ ", comarca=" + comarca.getNombre() + ", provincia="
+				+ getProvincia().getNombre() + "]";
 	}
 }

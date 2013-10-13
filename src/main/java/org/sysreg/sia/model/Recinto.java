@@ -2,62 +2,60 @@ package org.sysreg.sia.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@Entity
+@Table(name = "RECINTOS")
+@IdClass(RecintoId.class)
 public class Recinto implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private RecintoId id = new RecintoId();
+	// @Id Evitamos así que se inerte la parcela de nuevo
+	@ManyToOne
+	@JoinColumns({
+			@JoinColumn(name = "MUNICIPIO_ID", referencedColumnName = "MUNICIPIO_ID"),
+			@JoinColumn(name = "AGREGADO", referencedColumnName = "AGREGADO"),
+			@JoinColumn(name = "ZONA", referencedColumnName = "ZONA"),
+			@JoinColumn(name = "POLIGONO", referencedColumnName = "POLIGONO"),
+			@JoinColumn(name = "PARCELA", referencedColumnName = "PARCELA"), })
+	private Parcela parcela;
+	@Id
+	private int recinto;
+
+	@Column
 	private float superficie;
+	@Column
 	private float pendiente;
+	@Column
 	private float coefRegadio;
+	@Embedded
 	private Coordenadas coordenadas;
+	@ManyToOne
+	@JoinColumn(name = "USO_ID")
 	private Uso uso;
 
-	public static class RecintoId implements Serializable {
-		public Parcela parcela;
-		public int recinto;
-
-		public RecintoId() {
-		}
-
-		public RecintoId(Parcela parcela, int recinto) {
-			super();
-			this.parcela = parcela;
-			this.recinto = recinto;
-		}
-
-		public Parcela getParcela() {
-			return parcela;
-		}
-
-		public void setParcela(Parcela parcela) {
-			this.parcela = parcela;
-		}
-
-		public int getRecinto() {
-			return recinto;
-		}
-
-		public void setRecinto(int recinto) {
-			this.recinto = recinto;
-		}
+	public Parcela getParcela() {
+		return parcela;
 	}
 
-	public RecintoId getId() {
-		return id;
-	}
-
-	public void setId(RecintoId id) {
-		this.id = id;
+	public void setParcela(Parcela parcela) {
+		this.parcela = parcela;
 	}
 
 	public int getRecinto() {
-		return id.recinto;
+		return recinto;
 	}
 
 	public void setRecinto(int recinto) {
-		this.id.recinto = recinto;
+		this.recinto = recinto;
 	}
 
 	public float getSuperficie() {
@@ -84,14 +82,6 @@ public class Recinto implements Serializable {
 		this.coefRegadio = coefRegadio;
 	}
 
-	public Parcela getParcela() {
-		return id.parcela;
-	}
-
-	public void setParcela(Parcela parcela) {
-		this.id.parcela = parcela;
-	}
-
 	public Coordenadas getCoordenadas() {
 		return coordenadas;
 	}
@@ -109,8 +99,9 @@ public class Recinto implements Serializable {
 	}
 
 	public String toString() {
-		return "Recinto [id=" + id.getRecinto() + ", superficie=" + superficie + ", pendiente=" + pendiente
-				+ ", coefRegadio=" + coefRegadio + ", coordenadas=" + coordenadas.toString() + ", uso="
+		return "Recinto [id=" + getRecinto() + ", superficie=" + superficie
+				+ ", pendiente=" + pendiente + ", coefRegadio=" + coefRegadio
+				+ ", coordenadas=" + coordenadas.toString() + ", uso="
 				+ uso.getDescripcion() + "]";
 	}
 

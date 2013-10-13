@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Embeddable
 public class ParcelaId implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	private Municipio municipio;
 	private int agregado;
 	private int zona;
@@ -19,7 +20,8 @@ public class ParcelaId implements Serializable {
 	public ParcelaId() {
 	}
 
-	public ParcelaId(Municipio municipio, int agregado, int zona, int poligono, int parcela) {
+	public ParcelaId(Municipio municipio, int agregado, int zona, int poligono,
+			int parcela) {
 		super();
 		this.municipio = municipio;
 		this.agregado = agregado;
@@ -72,8 +74,8 @@ public class ParcelaId implements Serializable {
 		return new HashCodeBuilder(17, 31)
 				. // two randomly chosen prime numbers
 					// if deriving: appendSuper(super.hashCode()).
-				append(municipio.getCodigo()).append(agregado).append(zona).append(poligono).append(parcela)
-				.toHashCode();
+				append(municipio.getCodigo()).append(agregado).append(zona)
+				.append(poligono).append(parcela).toHashCode();
 	}
 
 	public boolean equals(Object obj) {
@@ -88,8 +90,10 @@ public class ParcelaId implements Serializable {
 		return new EqualsBuilder()
 				.
 				// if deriving: appendSuper(super.equals(obj)).
-				append(municipio.getCodigo(), rhs.getMunicipio().getCodigo()).append(agregado, rhs.getAgregado())
-				.append(zona, rhs.getZona()).append(poligono, rhs.getPoligono()).append(parcela, rhs.getParcela())
-				.isEquals();
+				append(municipio.getCodigo(), rhs.getMunicipio().getCodigo())
+				.append(agregado, rhs.getAgregado())
+				.append(zona, rhs.getZona())
+				.append(poligono, rhs.getPoligono())
+				.append(parcela, rhs.getParcela()).isEquals();
 	}
 }

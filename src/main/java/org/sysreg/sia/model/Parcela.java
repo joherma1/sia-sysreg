@@ -5,11 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,9 +37,10 @@ public class Parcela implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "CAMPO_ID")
 	private Campo campo;
-
-	// private Set<Recinto> recintos = new HashSet<Recinto>();
-	// private Coordenadas coordenadas;
+	@OneToMany(mappedBy = "parcela")
+	private Set<Recinto> recintos = new HashSet<Recinto>();
+	@Embedded
+	private Coordenadas coordenadas;
 
 	public Municipio getMunicipio() {
 		return municipio;
@@ -87,22 +90,22 @@ public class Parcela implements Serializable {
 		this.superficie = superficie;
 	}
 
-	// public Set<Recinto> getRecintos() {
-	// return recintos;
-	// }
-	//
-	// public void setRecintos(Set<Recinto> recintos) {
-	// this.recintos = recintos;
-	// }
-	//
-	// public Coordenadas getCoordenadas() {
-	// return coordenadas;
-	// }
-	//
-	// public void setCoordenadas(Coordenadas coordenadas) {
-	// this.coordenadas = coordenadas;
-	// }
-	//
+	public Set<Recinto> getRecintos() {
+		return recintos;
+	}
+
+	public void setRecintos(Set<Recinto> recintos) {
+		this.recintos = recintos;
+	}
+
+	public Coordenadas getCoordenadas() {
+		return coordenadas;
+	}
+
+	public void setCoordenadas(Coordenadas coordenadas) {
+		this.coordenadas = coordenadas;
+	}
+
 	public Campo getCampo() {
 		return campo;
 	}

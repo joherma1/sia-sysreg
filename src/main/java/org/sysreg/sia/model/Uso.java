@@ -1,12 +1,14 @@
 package org.sysreg.sia.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 //import org.sysreg.sia.shared.UsoDTO;
@@ -14,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USOS")
 public class Uso implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +26,8 @@ public class Uso implements Serializable {
 	@Column(name = "DESCRIPCION", length = 255)
 	private String descripcion;
 
-	// private Set<Recinto> recintos;
+	@OneToMany(mappedBy = "uso")
+	private Set<Recinto> recintos;
 
 	// public char[] getCodigo() {
 	// return codigo;

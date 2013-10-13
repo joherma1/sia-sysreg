@@ -2,13 +2,22 @@ package org.sysreg.sia.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 //import org.sysreg.sia.shared.CoordenadasDTO;
 
+@Embeddable
 public class Coordenadas implements Serializable {
+	private static final long serialVersionUID = 1L;
 
+	@Column
 	private double x;
+	@Column
 	private double y;
+	@Column
 	private String datum;
+	@Column
 	private int huso;
 
 	public Coordenadas() {
