@@ -11,5 +11,11 @@ public interface UserDao {
 	List<User> getAllUsers();
 
 	void persist(User user);
+	
+	User findById(Integer id);
+	
+	User findByName(String name);
+	
+	void tearDown();
 
 }
