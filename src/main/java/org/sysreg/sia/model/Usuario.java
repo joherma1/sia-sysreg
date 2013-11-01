@@ -48,7 +48,7 @@ public class Usuario implements Serializable {
 	private String dni;
 
 	@ManyToOne
-	@JoinColumn(name = "MUNICIPIO_ID", nullable = false)
+	@JoinColumn(name = "MUNICIPIO_ID", nullable = true)
 	private Municipio municipio;
 
 	@OneToMany(mappedBy = "usuario")

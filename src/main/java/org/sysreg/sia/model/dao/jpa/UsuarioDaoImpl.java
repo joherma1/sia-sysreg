@@ -1,7 +1,12 @@
 package org.sysreg.sia.model.dao.jpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,5 +23,33 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	public void persist(Usuario usuario) {
 		entityManager.persist(usuario);
 	}
+
+	@Override
+	@Transactional
+	public Usuario findById(int id) {
+		entityManager.find(Usuario.class, id);
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public List<Usuario> findAll() {
+		return entityManager.createQuery("from Usuario",Usuario.class).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public Usuario findByUsuario(String usuario) {
+		Query q = entityManager.createQuery("from Usuario where usuario = ?1", Usuario.class);
+		q.setParameter(1, usuario);
+		List<Usuario> results = q.getResultList();
+		if(results.size()>0)
+			return results.get(0);
+		else
+			return null;
+	}
+	
+	
+	
 
 }
