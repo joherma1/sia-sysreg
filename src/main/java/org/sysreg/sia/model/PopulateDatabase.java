@@ -32,7 +32,7 @@ public class PopulateDatabase {
 		Query queryProvincias = entityManager
 				.createNativeQuery("INSERT INTO \"public\".\"provincias\" VALUES ('12', 'Castelló / Castellón');"
 						+ "INSERT INTO \"public\".\"provincias\" VALUES ('3', 'Alacant / Alicante');"
-						+ "INSERT INTO \"public\".\"provincias\" VALUES ('46', 'València ');");
+						+ "INSERT INTO \"public\".\"provincias\" VALUES ('46', 'València');");
 		queryProvincias.executeUpdate();
 		
 		// Insert COMARCAS

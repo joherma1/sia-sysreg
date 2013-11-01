@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import org.sysreg.sia.model.dao.MunicipioDao;
 import org.sysreg.sia.model.dao.UsuarioDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,6 +19,8 @@ import org.sysreg.sia.model.dao.UsuarioDao;
 public class UsuarioTest {
 	@Autowired
 	private UsuarioDao usuarioDao;
+	@Autowired
+	private MunicipioDao municipioDao;
 
 	@Test
 	public void testInsertSelect(){
@@ -29,6 +32,7 @@ public class UsuarioTest {
 		user.setDni("12345678T");
 		user.setUsuario("usuarioT");
 		user.setPassword("passwordT");
+		user.setMunicipio(municipioDao.findById(46015));
 		usuarioDao.persist(user);
 		Usuario user2 = new Usuario();
 		user2.setNombre("UsuarioT2");
@@ -43,7 +47,10 @@ public class UsuarioTest {
 		Usuario result = usuarioDao.findByUsuario("usuarioT");
 		Usuario result2 = usuarioDao.findByUsuario("usuarioT2");
 		assertSame(user, result);
+		assertEquals(46015, result.getMunicipio().getCodigo());
+		assertEquals("València", result.getMunicipio().getProvincia().getNombre());
 		assertNotSame(user, result2);
+		assertNull(result2.getMunicipio());
 	}
 
 }
