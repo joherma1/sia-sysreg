@@ -38,7 +38,6 @@ public class UsuarioTest {
 		user2.setDni("12345678T2");
 		user2.setUsuario("usuarioT2");
 		user2.setPassword("passwordT2");
-		usuarioDao.persist(user);
 		usuarioDao.persist(user2);
 		
 		Usuario result = usuarioDao.findByUsuario("usuarioT");
