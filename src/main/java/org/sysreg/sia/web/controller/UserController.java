@@ -55,63 +55,65 @@ public class UserController {
 
 	@RequestMapping("/users.html")
 	public String users(ModelMap models) {
-		Provincia p = new Provincia();
-		p.setCodigo(46);
-		p.setNombre("Valencia");
+//		Provincia p = new Provincia();
+//		p.setCodigo(46);
+//		p.setNombre("Valencia");
+//
+//		Comarca c = new Comarca();
+//		c.setNombre("L'Horta Sud");
+//		c.setProvincia(p);
+//
+//		Municipio m = new Municipio();
+//		m.setCodigo(46290);
+//		m.setNombre("Alcasser");
+//		m.setComarca(c);
+//
+//		Usuario u = new Usuario();
+//		u.setNombre("Jose Antonio");
+//		u.setApellidos("Hernández Martínez");
+//		u.setDireccion("Ricardo Hernandez 60");
+//		u.setMunicipio(m);
+//
+//		Campo camp = new Campo();
+//		camp.setCodigo(1234);
+//		camp.setNombre("Campo 1");
+//		camp.setUsuario(u);
+//
+//		Parcela parc = new Parcela();
+//		parc.setMunicipio(m);
+//		parc.setAgregado(0);
+//		parc.setZona(0);
+//		parc.setPoligono(0);
+//		parc.setParcela(1);
+//		parc.setSuperficie(2F);
+//		parc.setCampo(camp);
+//		parc.setCoordenadas(new Coordenadas(123D, 456D, "DATUM", 30));
+//
+//		Uso uso = new Uso();
+//		uso.setDescripcion("Uso de prueba");
+//
+//		Recinto rec = new Recinto();
+//		rec.setParcela(parc);
+//		rec.setRecinto(10);
+//		rec.setSuperficie(1.1F);
+//		rec.setCoefRegadio(2F);
+//		rec.setCoordenadas(new Coordenadas(123D, 456D, "DATUM", 30));
+//		rec.setUso(uso);
+//
+//		provinciaDao.persist(p);
+//		comarcaDao.persist(c);
+//		municipioDao.persist(m);
+//		usoDao.persist(uso);
+//		usuarioDao.persist(u);
+//		campoDao.persist(camp);
+//		System.out.println("Campo Insertado, paso a parcelas");
+//		parcelaDao.persist(parc);
+//		System.out.println("Parcela Insertada, paso a recintos");
+//
+//		recintoDao.persist(rec);
 
-		Comarca c = new Comarca();
-		c.setNombre("L'Horta Sud");
-		c.setProvincia(p);
-
-		Municipio m = new Municipio();
-		m.setCodigo(46290);
-		m.setNombre("Alcasser");
-		m.setComarca(c);
-
-		Usuario u = new Usuario();
-		u.setNombre("Jose Antonio");
-		u.setApellidos("Hernández Martínez");
-		u.setDireccion("Ricardo Hernandez 60");
-		u.setMunicipio(m);
-
-		Campo camp = new Campo();
-		camp.setCodigo(1234);
-		camp.setNombre("Campo 1");
-		camp.setUsuario(u);
-
-		Parcela parc = new Parcela();
-		parc.setMunicipio(m);
-		parc.setAgregado(0);
-		parc.setZona(0);
-		parc.setPoligono(0);
-		parc.setParcela(1);
-		parc.setSuperficie(2F);
-		parc.setCampo(camp);
-		parc.setCoordenadas(new Coordenadas(123D, 456D, "DATUM", 30));
-
-		Uso uso = new Uso();
-		uso.setDescripcion("Uso de prueba");
-
-		Recinto rec = new Recinto();
-		rec.setParcela(parc);
-		rec.setRecinto(10);
-		rec.setSuperficie(1.1F);
-		rec.setCoefRegadio(2F);
-		rec.setCoordenadas(new Coordenadas(123D, 456D, "DATUM", 30));
-		rec.setUso(uso);
-
-		provinciaDao.persist(p);
-		comarcaDao.persist(c);
-		municipioDao.persist(m);
-		usoDao.persist(uso);
-		usuarioDao.persist(u);
-		campoDao.persist(camp);
-		System.out.println("Campo Insertado, paso a parcelas");
-		parcelaDao.persist(parc);
-		System.out.println("Parcela Insertada, paso a recintos");
-
-		recintoDao.persist(rec);
-		models.put("users", userDao.getAllUsers());
+	//	models.put("users", userDao.getAllUsers());
+        models.put("municipios",municipioDao.findAll());
 		return "users";
 	}
 }
