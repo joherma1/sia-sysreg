@@ -9,26 +9,26 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.dao.MunicipioDao;
+import org.sysreg.sia.model.dao.TownDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
-public class MunicipioTest {
+public class TownTest {
 	@Autowired
-	private MunicipioDao municipioDao;
+	private TownDao townDao;
 
 	@Test
 	public void testSelect() {
-		Municipio municipio = municipioDao.findByNombre("Alcàsser");
-		assertEquals(46015, municipio.getCodigo());
-		assertEquals("L'Horta Sud", municipio.getComarca().getNombre());
-		assertEquals("València", municipio.getComarca().getProvincia().getNombre());
+		Town town = townDao.findByName("Alcàsser");
+		assertEquals(46015, town.getId());
+		assertEquals("L'Horta Sud", town.getRegion().getName());
+		assertEquals("València", town.getRegion().getProvince().getName());
 		
-		assertEquals(12002, municipioDao.findById(12002).getCodigo());
+		assertEquals(12002, townDao.findById(12002).getId());
 		
-		assertEquals(542,municipioDao.findAll().size());
+		assertEquals(542, townDao.findAll().size());
 		
 	}
 }

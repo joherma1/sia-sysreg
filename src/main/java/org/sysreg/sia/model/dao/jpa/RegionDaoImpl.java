@@ -5,19 +5,19 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.Comarca;
-import org.sysreg.sia.model.dao.ComarcaDao;
+import org.sysreg.sia.model.Region;
+import org.sysreg.sia.model.dao.RegionDao;
 
 @Repository
-public class ComarcaDaoImpl implements ComarcaDao {
+public class RegionDaoImpl implements RegionDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	@Transactional
-	public void persist(Comarca camarca) {
-		entityManager.persist(camarca);
+	public void persist(Region region) {
+		entityManager.persist(region);
 	}
 
 }

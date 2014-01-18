@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 //import org.sysreg.sia.shared.CoordenadasDTO;
 
 @Embeddable
-public class Coordenadas implements Serializable {
+public class Coordinates implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column
@@ -18,18 +18,18 @@ public class Coordenadas implements Serializable {
 	@Column
 	private String datum;
 	@Column
-	private int huso;
+	private int spindle;
 
-	public Coordenadas() {
+	public Coordinates() {
 
 	}
 
-	public Coordenadas(double x, double y, String datum, int huso) {
+	public Coordinates(double x, double y, String datum, int spindle) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.datum = datum;
-		this.huso = huso;
+		this.spindle = spindle;
 	}
 
 	public double getX() {
@@ -56,12 +56,12 @@ public class Coordenadas implements Serializable {
 		this.datum = datum;
 	}
 
-	public int getHuso() {
-		return huso;
+	public int getSpindle() {
+		return spindle;
 	}
 
-	public void setHuso(int huso) {
-		this.huso = huso;
+	public void setSpindle(int spindle) {
+		this.spindle = spindle;
 	}
 
 	// public CoordenadasDTO toCoordenadasDTO() {
@@ -69,7 +69,7 @@ public class Coordenadas implements Serializable {
 	// }
 
 	public String toString() {
-		return "X: " + x + " Y: " + y + " Datum: " + datum + " Huso: " + huso;
+		return "X: " + x + " Y: " + y + " Datum: " + datum + " Huso: " + spindle;
 
 	}
 

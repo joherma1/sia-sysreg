@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.sysreg.sia.model.dao.*;
 
 @Controller
-public class MunicipiosController {
+public class TownsController {
 
     @Autowired
-    MunicipioDao municipioDao;
+    TownDao townDao;
 
-	@RequestMapping("/municipios.html")
-	public String municipios(ModelMap models) {
-        models.put("municipios",municipioDao.findAll());
-		return "municipios";
+	@RequestMapping("/towns.html")
+	public String towns(ModelMap models) {
+        models.put("towns", townDao.findAll());
+		return "towns";
 	}
 }

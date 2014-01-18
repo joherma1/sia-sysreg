@@ -2184,21 +2184,32 @@
       <column name="viewowner" sqlType="name" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
       <column name="definition" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
     </table>
-    <table name="campos" schema="public" catalog="sia_pru" type="TABLE">
-      <column name="codigo" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="nombre" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="usuario_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="campos_pkey" columns="codigo"/>
-      <foreign-key name="fk760ce02526a75d75" columns="usuario_id" ref-table="usuarios" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fk74911dfb8a665435" table="parcelas" schema="public" catalog="sia_pru" columns="campo_id"/>
+    <table name="enclosures" schema="public" catalog="sia_pru" type="TABLE">
+      <column name="enclosure" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="area" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
+      <column name="datum" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="spindle" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="x" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
+      <column name="y" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
+      <column name="irrigationcoef" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
+      <column name="slope" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
+      <column name="aggregate" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="parcel" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="polygon" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="town_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="zone" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="use_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="enclosures_pkey" columns="enclosure,aggregate,parcel,polygon,town_id,zone"/>
+      <foreign-key name="fk7475fd414e7dfec4" columns="aggregate,parcel,polygon,town_id,zone" ref-table="parcels" ref-schema="public" ref-catalog="" ref-columns="aggregate,parcel,polygon,town_id,zone" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk7475fd41dcf90855" columns="use_id" ref-table="uses" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
-    <table name="comarcas" schema="public" catalog="sia_pru" type="TABLE">
-      <column name="codigo" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="nombre" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="provincia_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="comarcas_pkey" columns="codigo"/>
-      <foreign-key name="fka1a7123b52d6655" columns="provincia_id" ref-table="provincias" ref-schema="public" ref-catalog="" ref-columns="codigo" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fke7915226a9931235" table="municipios" schema="public" catalog="sia_pru" columns="comarca_id"/>
+    <table name="fields" schema="public" catalog="sia_pru" type="TABLE">
+      <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="fields_pkey" columns="id"/>
+      <foreign-key name="fk7b9872b9c230813f" columns="user_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fkfb808d6a5b855cb5" table="parcels" schema="public" catalog="sia_pru" columns="field_id"/>
     </table>
     <table name="hibernate_sequence" schema="public" catalog="sia_pru" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
@@ -2212,76 +2223,65 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
-    <table name="municipios" schema="public" catalog="sia_pru" type="TABLE">
-      <column name="codigo" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="nombre" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="comarca_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="municipios_pkey" columns="codigo"/>
-      <foreign-key name="fke7915226a9931235" columns="comarca_id" ref-table="comarcas" ref-schema="public" ref-catalog="" ref-columns="codigo" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fk74911dfbaedcfe55" table="parcelas" schema="public" catalog="sia_pru" columns="municipio_id"/>
-      <exported-key name="fk392f6305aedcfe55" table="usuarios" schema="public" catalog="sia_pru" columns="municipio_id"/>
-    </table>
-    <table name="parcelas" schema="public" catalog="sia_pru" type="TABLE">
-      <column name="agregado" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="parcela" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="poligono" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="zona" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+    <table name="parcels" schema="public" catalog="sia_pru" type="TABLE">
+      <column name="aggregate" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="parcel" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="polygon" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="zone" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="area" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
       <column name="datum" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="huso" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="spindle" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="x" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
       <column name="y" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
-      <column name="superficie" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
-      <column name="municipio_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="campo_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="parcelas_pkey" columns="agregado,municipio_id,parcela,poligono,zona"/>
-      <foreign-key name="fk74911dfb8a665435" columns="campo_id" ref-table="campos" ref-schema="public" ref-catalog="" ref-columns="codigo" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk74911dfbaedcfe55" columns="municipio_id" ref-table="municipios" ref-schema="public" ref-catalog="" ref-columns="codigo" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fkfeac77838e79f963" table="recintos" schema="public" catalog="sia_pru" columns="agregado,municipio_id,parcela,poligono,zona"/>
+      <column name="town_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="field_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="parcels_pkey" columns="aggregate,parcel,polygon,town_id,zone"/>
+      <foreign-key name="fkfb808d6a5b855cb5" columns="field_id" ref-table="fields" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fkfb808d6a877237df" columns="town_id" ref-table="towns" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk7475fd414e7dfec4" table="enclosures" schema="public" catalog="sia_pru" columns="aggregate,parcel,polygon,town_id,zone"/>
     </table>
-    <table name="provincias" schema="public" catalog="sia_pru" type="TABLE">
-      <column name="codigo" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="nombre" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="provincias_pkey" columns="codigo"/>
-      <exported-key name="fka1a7123b52d6655" table="comarcas" schema="public" catalog="sia_pru" columns="provincia_id"/>
-    </table>
-    <table name="recintos" schema="public" catalog="sia_pru" type="TABLE">
-      <column name="recinto" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="coefregadio" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
-      <column name="datum" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="huso" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="x" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
-      <column name="y" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
-      <column name="pendiente" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
-      <column name="superficie" sqlType="float4" length="8" precision="8" nullable="true" jdbcType="7"/>
-      <column name="agregado" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="municipio_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="parcela" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="poligono" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="zona" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="uso_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="recintos_pkey" columns="agregado,municipio_id,parcela,poligono,zona,recinto"/>
-      <foreign-key name="fkfeac77838e79f963" columns="agregado,municipio_id,parcela,poligono,zona" ref-table="parcelas" ref-schema="public" ref-catalog="" ref-columns="agregado,municipio_id,parcela,poligono,zona" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fkfeac7783dcfd9415" columns="uso_id" ref-table="usos" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="usos" schema="public" catalog="sia_pru" type="TABLE">
+    <table name="provinces" schema="public" catalog="sia_pru" type="TABLE">
       <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="descripcion" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="usos_pkey" columns="id"/>
-      <exported-key name="fkfeac7783dcfd9415" table="recintos" schema="public" catalog="sia_pru" columns="uso_id"/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="provinces_pkey" columns="id"/>
+      <exported-key name="fk6b8843dfc3c5d09f" table="regions" schema="public" catalog="sia_pru" columns="province_id"/>
     </table>
-    <table name="usuarios" schema="public" catalog="sia_pru" type="TABLE">
+    <table name="regions" schema="public" catalog="sia_pru" type="TABLE">
       <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="apellidos" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="direccion" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="province_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="regions_pkey" columns="id"/>
+      <foreign-key name="fk6b8843dfc3c5d09f" columns="province_id" ref-table="provinces" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk4c4f001e268ff5f" table="towns" schema="public" catalog="sia_pru" columns="region_id"/>
+    </table>
+    <table name="towns" schema="public" catalog="sia_pru" type="TABLE">
+      <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="region_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="towns_pkey" columns="id"/>
+      <foreign-key name="fk4c4f001e268ff5f" columns="region_id" ref-table="regions" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fkfb808d6a877237df" table="parcels" schema="public" catalog="sia_pru" columns="town_id"/>
+      <exported-key name="fk4d495e8877237df" table="users" schema="public" catalog="sia_pru" columns="town_id"/>
+    </table>
+    <table name="users" schema="public" catalog="sia_pru" type="TABLE">
+      <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="address" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="dni" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="nombre" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="password" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="telefono" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="usuario" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="municipio_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="usuarios_pkey" columns="id"/>
-      <foreign-key name="fk392f6305aedcfe55" columns="municipio_id" ref-table="municipios" ref-schema="public" ref-catalog="" ref-columns="codigo" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fk760ce02526a75d75" table="campos" schema="public" catalog="sia_pru" columns="usuario_id"/>
+      <column name="surname" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="username" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="town_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="users_pkey" columns="id"/>
+      <foreign-key name="fk4d495e8877237df" columns="town_id" ref-table="towns" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk7b9872b9c230813f" table="fields" schema="public" catalog="sia_pru" columns="user_id"/>
+    </table>
+    <table name="uses" schema="public" catalog="sia_pru" type="TABLE">
+      <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="uses_pkey" columns="id"/>
+      <exported-key name="fk7475fd41dcf90855" table="enclosures" schema="public" catalog="sia_pru" columns="use_id"/>
     </table>
     <procedure name="_pg_char_max_length" schema="information_schema" catalog="sia_pru" type="2">
       <prototype>

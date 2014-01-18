@@ -5,18 +5,18 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.Provincia;
-import org.sysreg.sia.model.dao.ProvinciaDao;
+import org.sysreg.sia.model.Enclosure;
+import org.sysreg.sia.model.dao.EnclosureDao;
 
 @Repository
-public class ProvinciaDaoImpl implements ProvinciaDao {
+public class EnclosureDaoImpl implements EnclosureDao {
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
 	@Override
 	@Transactional
-	public void persist(Provincia provincia) {
-		entityManager.persist(provincia);
+	public void persist(Enclosure enclosure) {
+		entityManager.persist(enclosure);
 	}
 
 }

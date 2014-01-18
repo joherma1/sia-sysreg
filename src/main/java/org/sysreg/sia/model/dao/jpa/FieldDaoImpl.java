@@ -5,18 +5,19 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.Recinto;
-import org.sysreg.sia.model.dao.RecintoDao;
+import org.sysreg.sia.model.Field;
+import org.sysreg.sia.model.dao.FieldDao;
 
 @Repository
-public class RecintoDaoImpl implements RecintoDao{
+public class FieldDaoImpl implements FieldDao {
+
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	@Transactional
-	public void persist(Recinto recinto) {
-		entityManager.persist(recinto);
+	public void persist(Field field) {
+		entityManager.persist(field);
 	}
 
 }

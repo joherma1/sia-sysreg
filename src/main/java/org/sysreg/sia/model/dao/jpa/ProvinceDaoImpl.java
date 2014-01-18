@@ -5,19 +5,18 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.Uso;
-import org.sysreg.sia.model.dao.UsoDao;
+import org.sysreg.sia.model.Province;
+import org.sysreg.sia.model.dao.ProvinceDao;
 
 @Repository
-public class UsoDaoImpl implements UsoDao {
-
+public class ProvinceDaoImpl implements ProvinceDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	@Transactional
-	public void persist(Uso uso) {
-		entityManager.persist(uso);
+	public void persist(Province province) {
+		entityManager.persist(province);
 	}
 
 }

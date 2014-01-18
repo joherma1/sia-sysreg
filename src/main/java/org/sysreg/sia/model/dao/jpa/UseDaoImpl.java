@@ -5,18 +5,19 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.Parcela;
-import org.sysreg.sia.model.dao.ParcelaDao;
+import org.sysreg.sia.model.Use;
+import org.sysreg.sia.model.dao.UseDao;
 
 @Repository
-public class ParcelaDaoImpl implements ParcelaDao {
+public class UseDaoImpl implements UseDao {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	@Transactional
-	public void persist(Parcela parcela) {
-		entityManager.persist(parcela);
+	public void persist(Use use) {
+		entityManager.persist(use);
 	}
 
 }
