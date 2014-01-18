@@ -2263,13 +2263,6 @@
       <foreign-key name="fkfeac77838e79f963" columns="agregado,municipio_id,parcela,poligono,zona" ref-table="parcelas" ref-schema="public" ref-catalog="" ref-columns="agregado,municipio_id,parcela,poligono,zona" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="fkfeac7783dcfd9415" columns="uso_id" ref-table="usos" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
-    <table name="users" schema="public" catalog="sia_pru" type="TABLE">
-      <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="enabled" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
-      <column name="password" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="username" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="users_pkey" columns="id"/>
-    </table>
     <table name="usos" schema="public" catalog="sia_pru" type="TABLE">
       <column name="id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="descripcion" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
