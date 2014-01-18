@@ -9,7 +9,7 @@ import org.sysreg.sia.model.Parcela;
 import org.sysreg.sia.model.dao.ParcelaDao;
 
 @Repository
-public class ParcleaDaoImpl implements ParcelaDao {
+public class ParcelaDaoImpl implements ParcelaDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 

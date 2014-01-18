@@ -20,7 +20,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="siaPU" value="26012b44-21ef-4e37-8845-351b5955a8af" />
+          <factory-entry name="siaPU" value="5b6e496c-ba47-4e5f-a110-7c5b4ff3f1e6" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
