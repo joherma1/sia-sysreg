@@ -9,7 +9,7 @@
 <tr>
 <c:forEach items="${towns}" var="town">
 <tr>
-  <td>${town.codigo}</td><td>${town.nombre}</td><td>${town.region.nombre}</td>
+  <td>${town.id}</td><td>${town.name}</td><td>${town.region.name}</td>
 </tr>
 </c:forEach>
 </table>
