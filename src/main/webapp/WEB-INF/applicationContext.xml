@@ -32,6 +32,8 @@
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
+    <bean class="org.sysreg.sia.config.SecurityConfig"></bean>
+
 	<context:annotation-config />
 
 	<tx:annotation-driven />
