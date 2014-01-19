@@ -12,7 +12,7 @@ public class TownsController {
     @Autowired
     TownDao townDao;
 
-	@RequestMapping("/towns.html")
+	@RequestMapping("/towns")
 	public String towns(ModelMap models) {
         models.put("towns", townDao.findAll());
 		return "towns";
