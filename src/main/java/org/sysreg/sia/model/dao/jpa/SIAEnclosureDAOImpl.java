@@ -6,10 +6,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.Enclosure;
-import org.sysreg.sia.model.dao.EnclosureDAO;
+import org.sysreg.sia.model.dao.SIAEnclosureDAO;
 
 @Repository
-public class EnclosureDAOImpl implements EnclosureDAO {
+public class SIAEnclosureDAOImpl implements SIAEnclosureDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 	

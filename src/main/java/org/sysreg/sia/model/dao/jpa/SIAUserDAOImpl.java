@@ -9,10 +9,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.User;
-import org.sysreg.sia.model.dao.UserDAO;
+import org.sysreg.sia.model.dao.SIAUserDAO;
 
 @Repository
-public class UserDAOImpl implements UserDAO {
+public class SIAUserDAOImpl implements SIAUserDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 

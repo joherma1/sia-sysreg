@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.dao.TownDAO;
+import org.sysreg.sia.model.dao.SIATownDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
@@ -17,18 +17,18 @@ import org.sysreg.sia.model.dao.TownDAO;
 @Transactional
 public class TownTest {
 	@Autowired
-	private TownDAO townDAO;
+	private SIATownDAO SIATownDAO;
 
 	@Test
 	public void testSelect() {
-		Town town = townDAO.findByName("Alcàsser");
+		Town town = SIATownDAO.findByName("Alcàsser");
 		assertEquals(46015, town.getId());
 		assertEquals("L'Horta Sud", town.getRegion().getName());
 		assertEquals("València", town.getRegion().getProvince().getName());
 		
-		assertEquals(12002, townDAO.findById(12002).getId());
+		assertEquals(12002, SIATownDAO.findById(12002).getId());
 		
-		assertEquals(542, townDAO.findAll().size());
+		assertEquals(542, SIATownDAO.findAll().size());
 		
 	}
 }

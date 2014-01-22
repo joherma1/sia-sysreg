@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.Authority;
 import org.sysreg.sia.model.User;
-import org.sysreg.sia.model.dao.AuthorityDAO;
+import org.sysreg.sia.model.dao.SIAAuthorityDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class AuthorityDAOImpl implements AuthorityDAO {
+public class SIAAuthorityDAOImpl implements SIAAuthorityDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 

@@ -7,8 +7,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.dao.AuthorityDAO;
-import org.sysreg.sia.model.dao.UserDAO;
+import org.sysreg.sia.model.dao.SIAAuthorityDAO;
+import org.sysreg.sia.model.dao.SIAUserDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,9 +24,9 @@ import static org.junit.Assert.assertNotNull;
 @Transactional
 public class AuthorityTest {
     @Autowired
-    private AuthorityDAO authorityDAO;
+    private SIAAuthorityDAO SIAAuthorityDAO;
     @Autowired
-    private UserDAO userDAO;
+    private SIAUserDAO SIAUserDAO;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -36,12 +36,12 @@ public class AuthorityTest {
 
         Authority a1 = new Authority();
         a1.setName(nameRole);
-        authorityDAO.persist(a1);
-        assertNotNull(authorityDAO.findByName(nameRole));
+        SIAAuthorityDAO.persist(a1);
+        assertNotNull(SIAAuthorityDAO.findByName(nameRole));
 
         Authority a2 = new Authority();
         a2.setName(nameRole);
-        authorityDAO.persist(a2);
+        SIAAuthorityDAO.persist(a2);
 
         entityManager.flush();
     }
@@ -51,13 +51,13 @@ public class AuthorityTest {
         String defaultRole = ("ROLE_USER");
         String defaultUsername = ("sia");
 
-        Authority defaultAuth = authorityDAO.findByName(defaultRole);
+        Authority defaultAuth = SIAAuthorityDAO.findByName(defaultRole);
         assertNotNull(defaultAuth);
 
-        User defaultUser = userDAO.findByUsername(defaultUsername);
+        User defaultUser = SIAUserDAO.findByUsername(defaultUsername);
         assertNotNull(defaultUser);
 
-        Authority authDefaultUser = authorityDAO.findByUser(defaultUser);
+        Authority authDefaultUser = SIAAuthorityDAO.findByUser(defaultUser);
         assertNotNull(authDefaultUser);
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysreg.sia.model.dao.TownDAO;
-import org.sysreg.sia.model.dao.UserDAO;
+import org.sysreg.sia.model.dao.SIATownDAO;
+import org.sysreg.sia.model.dao.SIAUserDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
@@ -18,9 +18,9 @@ import org.sysreg.sia.model.dao.UserDAO;
 @Transactional
 public class UserTest {
 	@Autowired
-	private UserDAO userDAO;
+	private SIAUserDAO SIAUserDAO;
 	@Autowired
-	private TownDAO townDAO;
+	private SIATownDAO SIATownDAO;
 
 	@Test
 	public void testInsertSelect(){
@@ -32,8 +32,8 @@ public class UserTest {
 		user.setDni("12345678T");
 		user.setUsername("usuarioT");
 		user.setPassword("passwordT");
-		user.setTown(townDAO.findById(46015));
-		userDAO.persist(user);
+		user.setTown(SIATownDAO.findById(46015));
+		SIAUserDAO.persist(user);
 		User user2 = new User();
 		user2.setName("UsuarioT2");
 		user2.setSurname("Apellido1T2 Apellido2T");
@@ -42,10 +42,10 @@ public class UserTest {
 		user2.setDni("12345678T2");
 		user2.setUsername("usuarioT2");
 		user2.setPassword("passwordT2");
-		userDAO.persist(user2);
+		SIAUserDAO.persist(user2);
 		
-		User result = userDAO.findByUsername("usuarioT");
-		User result2 = userDAO.findByUsername("usuarioT2");
+		User result = SIAUserDAO.findByUsername("usuarioT");
+		User result2 = SIAUserDAO.findByUsername("usuarioT2");
 		assertSame(user, result);
 		assertEquals(46015, result.getTown().getId());
 		assertEquals("València", result.getTown().getProvince().getName());

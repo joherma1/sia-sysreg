@@ -6,9 +6,9 @@ import javax.persistence.Query;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.sysreg.sia.model.dao.AuthorityDAO;
-import org.sysreg.sia.model.dao.TownDAO;
-import org.sysreg.sia.model.dao.UserDAO;
+import org.sysreg.sia.model.dao.SIAAuthorityDAO;
+import org.sysreg.sia.model.dao.SIATownDAO;
+import org.sysreg.sia.model.dao.SIAUserDAO;
 
 public class PopulateDatabase {
 
@@ -637,9 +637,9 @@ public class PopulateDatabase {
 
     public void loadUsersAndAuthorities(){
         //Wire beans
-        UserDAO userDAO = context.getBean(UserDAO.class);
-        TownDAO townDAO = context.getBean(TownDAO.class);
-        AuthorityDAO authorityDAO = context.getBean(AuthorityDAO.class);
+        SIAUserDAO SIAUserDAO = context.getBean(SIAUserDAO.class);
+        SIATownDAO SIATownDAO = context.getBean(SIATownDAO.class);
+        SIAAuthorityDAO SIAAuthorityDAO = context.getBean(SIAAuthorityDAO.class);
 
         // Open a transaction
         EntityManagerFactory factory = (EntityManagerFactory) context.getBean("entityManagerFactory");
@@ -648,7 +648,7 @@ public class PopulateDatabase {
 
         Authority userAuthority = new Authority();
         userAuthority.setName("ROLE_USER");
-        authorityDAO.persist(userAuthority);
+        SIAAuthorityDAO.persist(userAuthority);
 
         User defaultUser = new User();
         defaultUser.setName("SIA");
@@ -657,9 +657,9 @@ public class PopulateDatabase {
         defaultUser.setUsername("sia");
         defaultUser.setPassword("agricultura.1");
         defaultUser.setActive(true);
-        defaultUser.setTown(townDAO.findByName("Alcàsser"));
+        defaultUser.setTown(SIATownDAO.findByName("Alcàsser"));
         defaultUser.setAuthority(userAuthority);
-        userDAO.persist(defaultUser);
+        SIAUserDAO.persist(defaultUser);
 
         entityManager.getTransaction().commit();
         entityManager.close();
