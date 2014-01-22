@@ -5,7 +5,7 @@ import org.sysreg.sia.model.User;
 
 import java.util.List;
 
-public interface SIAAuthorityDAO {
+public interface AuthorityDAO {
 	void persist(Authority authority);
 
     Authority findById(int id);

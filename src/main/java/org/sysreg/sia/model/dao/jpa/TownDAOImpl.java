@@ -9,10 +9,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.Town;
-import org.sysreg.sia.model.dao.SIATownDAO;
+import org.sysreg.sia.model.dao.TownDAO;
 
 @Repository
-public class SIATownDAOImpl implements SIATownDAO {
+public class TownDAOImpl implements TownDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.sysreg.sia.model.User;
 
-public interface SIAUserDAO {
+public interface UserDAO {
 	void persist(User user);
 
 	User findById(int id);

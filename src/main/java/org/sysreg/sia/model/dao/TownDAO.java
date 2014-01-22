@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.sysreg.sia.model.Town;
 
-public interface SIATownDAO {
+public interface TownDAO {
 	void persist(Town town);
 
 	Town findById(int id);
