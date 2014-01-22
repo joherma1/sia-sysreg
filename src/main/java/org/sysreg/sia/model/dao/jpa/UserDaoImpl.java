@@ -9,10 +9,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.User;
-import org.sysreg.sia.model.dao.UserDao;
+import org.sysreg.sia.model.dao.UserDAO;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDAOImpl implements UserDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -36,9 +36,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public User findByUser(String user) {
+	public User findByUsername(String username) {
 		Query q = entityManager.createQuery("from User where username = ?1", User.class);
-		q.setParameter(1, user);
+		q.setParameter(1, username);
 		List<User> results = q.getResultList();
 		if(results.size()>0)
 			return results.get(0);

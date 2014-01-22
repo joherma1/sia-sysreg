@@ -6,10 +6,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.Use;
-import org.sysreg.sia.model.dao.UseDao;
+import org.sysreg.sia.model.dao.UseDAO;
 
 @Repository
-public class UseDaoImpl implements UseDao {
+public class UseDAOImpl implements UseDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;

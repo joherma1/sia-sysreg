@@ -6,10 +6,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.Region;
-import org.sysreg.sia.model.dao.RegionDao;
+import org.sysreg.sia.model.dao.RegionDAO;
 
 @Repository
-public class RegionDaoImpl implements RegionDao {
+public class RegionDAOImpl implements RegionDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -32,10 +32,12 @@ public class User implements Serializable {
 	@GeneratedValue
 	private int id;
 	
-	@Column
+	@Column (unique = true, nullable = false)
 	private String username;
-	@Column
+	@Column (nullable = false)
 	private String password;
+    @Column
+    private boolean active = true;
 	@Column
 	private String name;
 	@Column
@@ -53,6 +55,10 @@ public class User implements Serializable {
 
 	@OneToMany(mappedBy = "user")
 	private Set<Field> fields = new HashSet<Field>();
+
+    @ManyToOne
+    @JoinColumn(name = "AUTHORITY_ID", nullable = true)
+    private Authority authority;
 
 	public int getId() {
 		return id;
@@ -77,6 +83,14 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
 	public String getName() {
 		return name;
@@ -130,7 +144,15 @@ public class User implements Serializable {
 		return fields;
 	}
 
-	public void setFields(Set<Field> fields) {
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+    }
+
+    public void setFields(Set<Field> fields) {
 		this.fields = fields;
 	}
 	//

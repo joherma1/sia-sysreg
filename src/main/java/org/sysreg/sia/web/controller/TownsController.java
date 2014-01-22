@@ -10,11 +10,11 @@ import org.sysreg.sia.model.dao.*;
 public class TownsController {
 
     @Autowired
-    TownDao townDao;
+    TownDAO townDAO;
 
 	@RequestMapping("/towns")
 	public String towns(ModelMap models) {
-        models.put("towns", townDao.findAll());
+        models.put("towns", townDAO.findAll());
 		return "towns";
 	}
 }

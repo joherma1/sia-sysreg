@@ -6,22 +6,33 @@ import javax.persistence.Query;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.sysreg.sia.model.dao.AuthorityDAO;
+import org.sysreg.sia.model.dao.TownDAO;
+import org.sysreg.sia.model.dao.UserDAO;
 
 public class PopulateDatabase {
+
+    private ApplicationContext context;
 
     public static void main(String[] args) {
         System.out.println("Initializing population");
         PopulateDatabase populate = new PopulateDatabase();
         populate.loadTowns();
+        System.out.println("Populating users and authorities");
+        populate.loadUsersAndAuthorities();
         System.out.println("Finished");
+
+    }
+
+    public PopulateDatabase() {
+        //Load context
+        context = new ClassPathXmlApplicationContext(
+                "file:src/main/webapp/WEB-INF/applicationContext.xml");
     }
 
     public void loadTowns() {
         // Configure Eclipse to add automatically escapes
         // Go to: Preferences/Java/Editor/Typing/ "Escape text when pasting into a string literal"
-        // Load the context
-        ApplicationContext context = new ClassPathXmlApplicationContext(
-                "file:src/main/webapp/WEB-INF/applicationContext.xml");
 
         // Open a transaction
         EntityManagerFactory factory = (EntityManagerFactory) context.getBean("entityManagerFactory");
@@ -619,6 +630,37 @@ public class PopulateDatabase {
         queryTowns.executeUpdate();
 
         // Close the connection
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+
+    public void loadUsersAndAuthorities(){
+        //Wire beans
+        UserDAO userDAO = context.getBean(UserDAO.class);
+        TownDAO townDAO = context.getBean(TownDAO.class);
+        AuthorityDAO authorityDAO = context.getBean(AuthorityDAO.class);
+
+        // Open a transaction
+        EntityManagerFactory factory = (EntityManagerFactory) context.getBean("entityManagerFactory");
+        EntityManager entityManager = factory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        Authority userAuthority = new Authority();
+        userAuthority.setName("ROLE_USER");
+        authorityDAO.persist(userAuthority);
+
+        User defaultUser = new User();
+        defaultUser.setName("SIA");
+        defaultUser.setSurname("Default User");
+        defaultUser.setDni("12345678A");
+        defaultUser.setUsername("sia");
+        defaultUser.setPassword("agricultura.1");
+        defaultUser.setActive(true);
+        defaultUser.setTown(townDAO.findByName("Alcàsser"));
+        defaultUser.setAuthority(userAuthority);
+        userDAO.persist(defaultUser);
+
         entityManager.getTransaction().commit();
         entityManager.close();
     }

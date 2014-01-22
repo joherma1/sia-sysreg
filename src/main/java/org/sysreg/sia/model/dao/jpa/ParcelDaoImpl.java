@@ -6,10 +6,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysreg.sia.model.Parcel;
-import org.sysreg.sia.model.dao.ParcelDao;
+import org.sysreg.sia.model.dao.ParcelDAO;
 
 @Repository
-public class ParcelDaoImpl implements ParcelDao {
+public class ParcelDAOImpl implements ParcelDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
