@@ -14,6 +14,7 @@
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <form-login login-page="/login"  default-target-url="/towns" authentication-failure-url="/accessdenied"/>
         <logout logout-success-url="/logout" />
+        <remember-me key="siaKey" token-validity-seconds="1800" />
     </http>
 
     <authentication-manager alias="authenticationManager">
@@ -26,7 +27,8 @@
             <jdbc-user-service id="userService" data-source-ref="dataSource"
                     users-by-username-query="SELECT username, password, active FROM USERS WHERE username=?"
                     authorities-by-username-query="SELECT u.username, a.name FROM USERS u, AUTHORITIES a WHERE u.username=? AND u.authority_id=a.id"
-             />
+                    />
+            <password-encoder hash="md5"></password-encoder>
         </authentication-provider>
     </authentication-manager>
 
