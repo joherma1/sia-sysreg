@@ -1,0 +1,2 @@
+Proyecto de Software Libre que pretende crear un sistema de información agricola abierto y extensible.
+SIA cumple con la especificación sysreg, de manera que permite controlar las parcelas con dispositivos AlReg
